@@ -1,4 +1,15 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
-  "maven.view": "hierarchical"
+  "maven.view": "hierarchical",
+  "editor.formatOnSave": true,
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-21",
+      "path": "/usr/lib/jvm/java-21-openjdk-amd64"
+    }
+  ],
+  "java.compile.nullAnalysis.mode": "automatic"
 }

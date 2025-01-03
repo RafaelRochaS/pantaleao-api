@@ -13,7 +13,8 @@ public class Player {
   @Max(value = 100, message = "Score must be less than or equal to 100")
   private int score;
 
-  public Player() {}
+  public Player() {
+  }
 
   public Player(int id, String name, int score) {
     this.id = id;
