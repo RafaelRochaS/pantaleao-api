@@ -14,6 +14,8 @@
     <properties>
         <java.version>21</java.version>
         <spring-boot.version>3.1.4</spring-boot.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -54,6 +56,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <mainClass>com.pantaleao.manager.PantaleaoManagerApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
