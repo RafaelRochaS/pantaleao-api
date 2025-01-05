@@ -5,6 +5,9 @@ import java.util.Date;
 import jakarta.validation.constraints.NotBlank;
 
 public class ScoreRecord {
+
+    private int scoreId;
+
     @NotBlank
     private Date date;
 
@@ -55,6 +58,74 @@ public class ScoreRecord {
 
     @NotBlank
     private boolean isPoliticalVictory;
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setWinnerId(int winnerId) {
+        this.winnerId = winnerId;
+    }
+
+    public void setLoserId(int loserId) {
+        this.loserId = loserId;
+    }
+
+    public void setBlueScore(int blueScore) {
+        this.blueScore = blueScore;
+    }
+
+    public void setGreenScore(int greenScore) {
+        this.greenScore = greenScore;
+    }
+
+    public void setYellowScore(int yellowScore) {
+        this.yellowScore = yellowScore;
+    }
+
+    public void setTempleScore(int templeScore) {
+        this.templeScore = templeScore;
+    }
+
+    public void setGodScore(int godScore) {
+        this.godScore = godScore;
+    }
+
+    public void setMonumentScore(int monumentScore) {
+        this.monumentScore = monumentScore;
+    }
+
+    public void setChipScore(int chipScore) {
+        this.chipScore = chipScore;
+    }
+
+    public void setMoneyScore(int moneyScore) {
+        this.moneyScore = moneyScore;
+    }
+
+    public void setMilitaryScore(int militaryScore) {
+        this.militaryScore = militaryScore;
+    }
+
+    public void setSenateScore(int senateScore) {
+        this.senateScore = senateScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public void setScientificVictory(boolean isScientificVictory) {
+        this.isScientificVictory = isScientificVictory;
+    }
+
+    public void setMilitaryVictory(boolean isMilitaryVictory) {
+        this.isMilitaryVictory = isMilitaryVictory;
+    }
+
+    public void setPoliticalVictory(boolean isPoliticalVictory) {
+        this.isPoliticalVictory = isPoliticalVictory;
+    }
 
     public Date getDate() {
         return date;
@@ -124,8 +195,6 @@ public class ScoreRecord {
         return isPoliticalVictory;
     }
 
-    private int scoreId;
-
     public ScoreRecord() {
     }
 
@@ -156,5 +225,4 @@ public class ScoreRecord {
     public void setScoreId(int scoreId) {
         this.scoreId = scoreId;
     }
-
 }
