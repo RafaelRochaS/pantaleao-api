@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class PlayerController {
 
   private List<Player> players = new ArrayList<>();
-  private int nextId = 1;
+  private int nextId = 0;
 
   @GetMapping
   public List<Player> getAllPlayers() {
-      return players;
+    return players;
   }
-  
+
   @PostMapping
   public ResponseEntity<Player> addPlayer(@Valid @RequestBody Player player) {
     player.setId(nextId++);
