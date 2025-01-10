@@ -1,11 +1,11 @@
 package com.pantaleao.manager.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pantaleao.manager.model.Player;
+import com.pantaleao.manager.repository.PlayerRepository;
 
 import jakarta.validation.Valid;
 
@@ -22,24 +22,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/api/v1/players")
 public class PlayerController {
 
-  private List<Player> players = new ArrayList<>();
-  private int nextId = 0;
+  private final PlayerRepository playerRepository;
+
+  public PlayerController(PlayerRepository playerRepository) {
+    this.playerRepository = playerRepository;
+  }
 
   @GetMapping
   public List<Player> getAllPlayers() {
-    return players;
+    return playerRepository.findAll();
   }
 
   @PostMapping
   public ResponseEntity<Player> addPlayer(@Valid @RequestBody Player player) {
-    player.setId(nextId++);
-    players.add(player);
+    playerRepository.save(player);
     return ResponseEntity.status(HttpStatus.CREATED).body(player);
   }
 
   @DeleteMapping("/{id}")
-  public String deletePlayer(@PathVariable int id) {
-    players.removeIf(player -> player.getId() == id);
-    return "Player deleted successfully";
+  public ResponseEntity<Void> deletePlayer(@PathVariable int id) {
+    if (!playerRepository.existsById(id)) {
+      return ResponseEntity.notFound().build();
+    }
+    playerRepository.deleteById(id);
+    return ResponseEntity.noContent().build();
   }
 }

@@ -1,13 +1,14 @@
 package com.pantaleao.manager.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pantaleao.manager.model.ScoreRecord;
+import com.pantaleao.manager.repository.ScoreRecordRepository;
 
 import jakarta.validation.Valid;
 
@@ -24,18 +25,20 @@ import java.util.Date;
 @RequestMapping("/api/v1/score-records")
 public class ScoreRecordController {
 
-  private List<ScoreRecord> scoreRecords = new ArrayList<>();
-  private int nextId = 0;
+  private final ScoreRecordRepository scoreRecordRepository;
+
+  public ScoreRecordController(ScoreRecordRepository scoreRecordRepository) {
+    this.scoreRecordRepository = scoreRecordRepository;
+  }
 
   @GetMapping
   public List<ScoreRecord> getAllScoreRecords() {
-    return scoreRecords;
+    return scoreRecordRepository.findAll();
   }
 
   @PostMapping
   public ResponseEntity<ScoreRecord> addScoreRecord(@Valid @RequestBody ScoreRecord scoreRecord) {
-    scoreRecord.setScoreId(nextId++);
-    scoreRecords.add(scoreRecord);
+    scoreRecordRepository.save(scoreRecord);
     return ResponseEntity.status(HttpStatus.CREATED).body(scoreRecord);
   }
 
@@ -43,14 +46,16 @@ public class ScoreRecordController {
   public ResponseEntity<ScoreRecord> updateScoreRecord(@PathVariable int id,
       @RequestBody Map<String, Object> updates) {
 
-    try {
-      ScoreRecord currentRecord = scoreRecords.get(id);
-      ScoreRecord updatedScoreRecord = updateScoreObject(currentRecord, updates);
-      scoreRecords.set(id, updatedScoreRecord);
+    Optional<ScoreRecord> currentRecord = scoreRecordRepository.findById(id);
 
-      return ResponseEntity.status(HttpStatus.NO_CONTENT).body(updatedScoreRecord);
-    } catch (IndexOutOfBoundsException e) {
+    if (currentRecord.isEmpty()) {
       return ResponseEntity.notFound().build();
+    }
+
+    try {
+      ScoreRecord updatedScoreRecord = updateScoreObject(currentRecord.get(), updates);
+      scoreRecordRepository.save(updatedScoreRecord);
+      return ResponseEntity.status(HttpStatus.NO_CONTENT).body(updatedScoreRecord);
     } catch (IllegalArgumentException e) {
       return ResponseEntity.badRequest().build();
     } catch (Exception e) {

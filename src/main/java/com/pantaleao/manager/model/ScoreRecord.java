@@ -2,60 +2,85 @@ package com.pantaleao.manager.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 
+@Entity
 public class ScoreRecord {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int scoreId;
 
+    @Column(nullable = false)
     @NotBlank
     private Date date;
 
+    @Column(nullable = false)
     @NotBlank
     private int winnerId;
 
+    @Column(nullable = false)
     @NotBlank
     private int loserId;
 
+    @Column(nullable = false)
     @NotBlank
     private int blueScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int greenScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int yellowScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int templeScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int godScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int monumentScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int chipScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int moneyScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int militaryScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int senateScore;
 
+    @Column(nullable = false)
     @NotBlank
     private int totalScore;
 
+    @Column(nullable = false)
     @NotBlank
     private boolean isScientificVictory;
 
+    @Column(nullable = false)
     @NotBlank
     private boolean isMilitaryVictory;
 
+    @Column(nullable = false)
     @NotBlank
     private boolean isPoliticalVictory;
 
