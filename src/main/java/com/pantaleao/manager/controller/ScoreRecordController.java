@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/api/v1/score-records")
+@RequestMapping("/api/v1/score-record")
 public class ScoreRecordController {
 
   private final ScoreRecordRepository scoreRecordRepository;

@@ -7,7 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class ScoreRecord {
@@ -17,138 +19,164 @@ public class ScoreRecord {
     private int scoreId;
 
     @Column(nullable = false)
-    @NotBlank
+    @NotNull
     private Date date;
 
     @Column(nullable = false)
-    @NotBlank
-    private int winnerId;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer winnerId;
 
     @Column(nullable = false)
-    @NotBlank
-    private int loserId;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer loserId;
 
     @Column(nullable = false)
-    @NotBlank
-    private int blueScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer blueScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int greenScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer greenScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int yellowScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer yellowScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int templeScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer templeScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int godScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer godScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int monumentScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer monumentScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int chipScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer chipScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int moneyScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer moneyScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int militaryScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer militaryScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int senateScore;
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Integer senateScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private int totalScore;
+    @NotNull
+    @Min(0)
+    @Max(200)
+    private Integer totalScore;
 
     @Column(nullable = false)
-    @NotBlank
-    private boolean isScientificVictory;
+    @NotNull
+    private Boolean isScientificVictory;
 
     @Column(nullable = false)
-    @NotBlank
-    private boolean isMilitaryVictory;
+    @NotNull
+    private Boolean isMilitaryVictory;
 
     @Column(nullable = false)
-    @NotBlank
-    private boolean isPoliticalVictory;
+    @NotNull
+    private Boolean isPoliticalVictory;
 
     public void setDate(Date date) {
         this.date = date;
     }
 
-    public void setWinnerId(int winnerId) {
+    public void setWinnerId(Integer winnerId) {
         this.winnerId = winnerId;
     }
 
-    public void setLoserId(int loserId) {
+    public void setLoserId(Integer loserId) {
         this.loserId = loserId;
     }
 
-    public void setBlueScore(int blueScore) {
+    public void setBlueScore(Integer blueScore) {
         this.blueScore = blueScore;
     }
 
-    public void setGreenScore(int greenScore) {
+    public void setGreenScore(Integer greenScore) {
         this.greenScore = greenScore;
     }
 
-    public void setYellowScore(int yellowScore) {
+    public void setYellowScore(Integer yellowScore) {
         this.yellowScore = yellowScore;
     }
 
-    public void setTempleScore(int templeScore) {
+    public void setTempleScore(Integer templeScore) {
         this.templeScore = templeScore;
     }
 
-    public void setGodScore(int godScore) {
+    public void setGodScore(Integer godScore) {
         this.godScore = godScore;
     }
 
-    public void setMonumentScore(int monumentScore) {
+    public void setMonumentScore(Integer monumentScore) {
         this.monumentScore = monumentScore;
     }
 
-    public void setChipScore(int chipScore) {
+    public void setChipScore(Integer chipScore) {
         this.chipScore = chipScore;
     }
 
-    public void setMoneyScore(int moneyScore) {
+    public void setMoneyScore(Integer moneyScore) {
         this.moneyScore = moneyScore;
     }
 
-    public void setMilitaryScore(int militaryScore) {
+    public void setMilitaryScore(Integer militaryScore) {
         this.militaryScore = militaryScore;
     }
 
-    public void setSenateScore(int senateScore) {
+    public void setSenateScore(Integer senateScore) {
         this.senateScore = senateScore;
     }
 
-    public void setTotalScore(int totalScore) {
+    public void setTotalScore(Integer totalScore) {
         this.totalScore = totalScore;
     }
 
-    public void setScientificVictory(boolean isScientificVictory) {
+    public void setScientificVictory(Boolean isScientificVictory) {
         this.isScientificVictory = isScientificVictory;
     }
 
-    public void setMilitaryVictory(boolean isMilitaryVictory) {
+    public void setMilitaryVictory(Boolean isMilitaryVictory) {
         this.isMilitaryVictory = isMilitaryVictory;
     }
 
-    public void setPoliticalVictory(boolean isPoliticalVictory) {
+    public void setPoliticalVictory(Boolean isPoliticalVictory) {
         this.isPoliticalVictory = isPoliticalVictory;
     }
 
@@ -156,55 +184,55 @@ public class ScoreRecord {
         return date;
     }
 
-    public int getWinnerId() {
+    public Integer getWinnerId() {
         return winnerId;
     }
 
-    public int getLoserId() {
+    public Integer getLoserId() {
         return loserId;
     }
 
-    public int getBlueScore() {
+    public Integer getBlueScore() {
         return blueScore;
     }
 
-    public int getGreenScore() {
+    public Integer getGreenScore() {
         return greenScore;
     }
 
-    public int getYellowScore() {
+    public Integer getYellowScore() {
         return yellowScore;
     }
 
-    public int getTempleScore() {
+    public Integer getTempleScore() {
         return templeScore;
     }
 
-    public int getGodScore() {
+    public Integer getGodScore() {
         return godScore;
     }
 
-    public int getMonumentScore() {
+    public Integer getMonumentScore() {
         return monumentScore;
     }
 
-    public int getChipScore() {
+    public Integer getChipScore() {
         return chipScore;
     }
 
-    public int getMoneyScore() {
+    public Integer getMoneyScore() {
         return moneyScore;
     }
 
-    public int getMilitaryScore() {
+    public Integer getMilitaryScore() {
         return militaryScore;
     }
 
-    public int getSenateScore() {
+    public Integer getSenateScore() {
         return senateScore;
     }
 
-    public int getTotalScore() {
+    public Integer getTotalScore() {
         return totalScore;
     }
 
@@ -243,11 +271,11 @@ public class ScoreRecord {
         this.isPoliticalVictory = scoreRecord.isPoliticalVictory();
     }
 
-    public int getScoreId() {
+    public Integer getScoreId() {
         return scoreId;
     }
 
-    public void setScoreId(int scoreId) {
+    public void setScoreId(Integer scoreId) {
         this.scoreId = scoreId;
     }
 }
