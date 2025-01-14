@@ -1,6 +1,5 @@
 package com.pantaleao.manager.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -12,6 +11,10 @@ import com.pantaleao.manager.repository.ScoreRecordRepository;
 
 import jakarta.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,7 @@ import java.util.Date;
 @RequestMapping("/api/v1/score-record")
 public class ScoreRecordController {
 
+  private static final Logger logger = LoggerFactory.getLogger(ScoreRecordController.class);
   private final ScoreRecordRepository scoreRecordRepository;
 
   public ScoreRecordController(ScoreRecordRepository scoreRecordRepository) {
@@ -32,8 +36,8 @@ public class ScoreRecordController {
   }
 
   @GetMapping
-  public List<ScoreRecord> getAllScoreRecords() {
-    return scoreRecordRepository.findAll();
+  public Page<ScoreRecord> getAllScoreRecords(Pageable pageable) {
+    return scoreRecordRepository.findAll(pageable);
   }
 
   @PostMapping
@@ -49,16 +53,19 @@ public class ScoreRecordController {
     Optional<ScoreRecord> currentRecord = scoreRecordRepository.findById(id);
 
     if (currentRecord.isEmpty()) {
+      logger.info("Score record with id {} not found", id);
       return ResponseEntity.notFound().build();
     }
 
     try {
       ScoreRecord updatedScoreRecord = updateScoreObject(currentRecord.get(), updates);
       scoreRecordRepository.save(updatedScoreRecord);
+
       return ResponseEntity.status(HttpStatus.NO_CONTENT).body(updatedScoreRecord);
     } catch (IllegalArgumentException e) {
       return ResponseEntity.badRequest().build();
     } catch (Exception e) {
+      logger.error("Unknown error:", e);
       return ResponseEntity.internalServerError().build();
     }
   }
