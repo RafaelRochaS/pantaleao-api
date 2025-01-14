@@ -2,11 +2,14 @@ package com.pantaleao.manager.controller;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Date;
+import java.util.HashMap;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pantaleao.manager.model.ScoreRecord;
+import com.pantaleao.manager.repository.PlayerRepository;
 import com.pantaleao.manager.repository.ScoreRecordRepository;
 
 import jakarta.validation.Valid;
@@ -22,7 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/api/v1/score-record")
@@ -30,9 +32,25 @@ public class ScoreRecordController {
 
   private static final Logger logger = LoggerFactory.getLogger(ScoreRecordController.class);
   private final ScoreRecordRepository scoreRecordRepository;
+  private final PlayerRepository playerRepository;
 
-  public ScoreRecordController(ScoreRecordRepository scoreRecordRepository) {
+  public ScoreRecordController(ScoreRecordRepository scoreRecordRepository, PlayerRepository playerRepository) {
     this.scoreRecordRepository = scoreRecordRepository;
+    this.playerRepository = playerRepository;
+  }
+
+  @GetMapping("/statistics")
+  public Map<String, Object> getStatistics() {
+    logger.info("Getting games statistics");
+
+    Map<String, Object> stats = new HashMap<>();
+    stats.put("totalGames", scoreRecordRepository.count());
+    stats.put("averageScore", scoreRecordRepository.findAverageScore());
+    ScoreRecord highestScore = scoreRecordRepository.findHighestScore();
+    stats.put("highestScore", highestScore.getTotalScore());
+    stats.put("highestScoreBy", playerRepository.findPlayerNameById(highestScore.getWinnerId()));
+
+    return stats;
   }
 
   @GetMapping
