@@ -1,5 +1,6 @@
 package com.pantaleao.manager.exceptions;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,7 +14,7 @@ import org.springframework.validation.FieldError;
 public class GlobalExceptionHandler {
   
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public ResponseEntity<Map<String,String>> handleValidationException(MethodArgumentNotValidException ex) {
+  public ResponseEntity<Map<String,String>> handleValidationException(@NotNull MethodArgumentNotValidException ex) {
     Map<String, String> errors = new HashMap<>();
 
     ex.getBindingResult().getAllErrors().forEach((error) -> {
